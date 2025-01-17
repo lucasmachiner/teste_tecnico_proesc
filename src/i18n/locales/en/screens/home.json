@@ -1,0 +1,20 @@
+{
+  "title": "React Native Basics",
+  "subtitle": "A collection of some basic react native features with practical implementations",
+  "item_1": {
+    "title": "Pull to Refresh",
+    "description": "The component RefreshControl provides pull-to-refresh functionality for a ScrollView or FlatList component. It can be used to refresh the contents of a list or refresh the contents of a page."
+  },
+  "item_2": {
+    "title": "Swipe to Delete",
+    "description": "This example demonstrates how to use the Swipeable component to add swipe-to-delete functionality to a FlatList component."
+  },
+  "item_3": {
+    "title": "Drag and drop for reordering",
+    "description": "This example demonstrates how to use the Reorder component to add drag-and-drop functionality to a FlatList component."
+  },
+  "item_4": {
+    "title": "Lista Expansível",
+    "description": "This example demonstrates how to use the ExpandableList component to add expandable list functionality to a FlatList component."
+  }
+}
