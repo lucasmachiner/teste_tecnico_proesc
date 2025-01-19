@@ -38,6 +38,7 @@ const styles = (selected: boolean) => StyleSheet.create({
     borderWidth: selected ? 0.6 : 0,
     borderColor: selected ? "blue" : "none",
     borderRadius: selected ? 8 : 0,
+    gap: 8,
   },
   content: {
     flex: 1,
