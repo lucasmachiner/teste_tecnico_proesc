@@ -10,3 +10,16 @@ export type RenderItemParams = {
   item: Item;
   index: number;
 };
+
+export type LanguageType = {
+  ptBr: "pt-BR",
+  enEua: "en-US",
+}
+
+export interface IDataItemLang {
+  flag: React.ReactNode,
+  label: string,
+  origin: string,
+  lang: LanguageType[keyof LanguageType],
+}
+
