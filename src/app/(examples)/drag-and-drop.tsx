@@ -1,24 +1,16 @@
 import React, { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import {
   View,
   TouchableOpacity,
   Text,
   StyleSheet,
+  Linking,
 } from "react-native";
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
 
-const DATA = [
-  {
-    key: "item-1",
-    label: "Product 1",
-  },
-  {
-    key: "item-2",
-    label: "Product 2",
-  },
-];
 
 type Item = {
   key: string;
@@ -26,6 +18,19 @@ type Item = {
 };
 
 function DragAndDrop() {
+  const { t: translation } = useTranslation();
+
+  const DATA = [
+    {
+      key: "item-1",
+      label: translation('examples.dragAndDrop.data.product_1'),
+    },
+    {
+      key: "item-2",
+      label: translation('examples.dragAndDrop.data.product_2'),
+    },
+  ];
+
   const [data, setData] = useState(DATA);
 
   const renderItem = useCallback(
@@ -47,20 +52,30 @@ function DragAndDrop() {
     <View style={styles.container}>
       <Text style={styles.title}>Drag and drop to reorder</Text>
       <Text style={styles.description}>
-        This examples uses the library react-native-draggable-flatlist to add
-        drag and drop functionality to a FlatList component.
+        {translation('examples.dragAndDrop.description')}
       </Text>
-      <Text style={{ paddingBottom: 10 }}>Long press any item to reorder</Text>
-      <Text>
-        Example from the react-native-draggable-flatlist documentation at https://github.com/computerjazz/react-native-draggable-flatlist
+      <Text style={{ paddingBottom: 10 }}>
+        {translation("examples.dragAndDrop.reorder")}
       </Text>
-        <DraggableFlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => `draggable-item-${item.key}`}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          onDragEnd={({ data }) => setData(data)}
-        />
+      <Text style={{ paddingBottom: 8, textAlign: "center" }}>
+        {translation("examples.dragAndDrop.example")}
+        <Text
+          onPress={() => Linking.openURL("https://github.com/computerjazz/react-native-draggable-flatlist")}
+          style={{
+            textDecorationLine: "underline",
+            color: "blue"
+          }}
+        >
+          {" https://github.com/computerjazz/react-native-draggable-flatlist"}
+        </Text>
+      </Text>
+      <DraggableFlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => `draggable-item-${item.key}`}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        onDragEnd={({ data }) => setData(data)}
+      />
     </View>
   );
 }

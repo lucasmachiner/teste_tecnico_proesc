@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Animated, StyleSheet, Text, View, I18nManager } from 'react-native';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 
 type Props = {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  translations: {
+    archive: string,
+    more: string,
+    flag: string,
+  };
 }; // Add props types here if needed
 type State = {}; // Add state types here if needed
 
@@ -18,7 +24,8 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
     return (
       <RectButton style={styles.leftAction} onPress={this.close}>
         <Animated.Text style={[styles.actionText]}>
-          Archive
+          {this.props.translations.archive}
+
         </Animated.Text>
       </RectButton>
     );
@@ -48,9 +55,9 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
 
   renderRightActions = (progress: Animated.AnimatedInterpolation<number>) => (
     <View style={{ width: 192, flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row' }}>
-      {this.renderRightAction('More', '#C8C7CD', 192, progress)}
-      {this.renderRightAction('Flag', '#ffab00', 128, progress)}
-      {this.renderRightAction('More', '#dd2c00', 64, progress)}
+      {this.renderRightAction(this.props.translations.more, '#C8C7CD', 192, progress)}
+      {this.renderRightAction(this.props.translations.flag, '#ffab00', 128, progress)}
+      {this.renderRightAction(this.props.translations.more, '#dd2c00', 64, progress)}
     </View>
   );
 

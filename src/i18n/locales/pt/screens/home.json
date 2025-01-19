@@ -1,0 +1,21 @@
+{
+  "headerTitle": "Início",
+  "title": "React Native Basics",
+  "subtitle": "Uma coleção de algumas funcionalidades básicas do React Native com implementações práticas.",
+  "item_1": {
+    "title": "Pull to Refresh(Puxar para Atualizar)",
+    "description": "O componente `RefreshControl` fornece a funcionalidade de puxar para atualizar em um ScrollView ou FlatList. Ele pode ser usado para atualizar o conteúdo de uma lista ou de uma página."
+  },
+  "item_2": {
+    "title": "Swipe to Delete(Deslizar para Deletar)",
+    "description": "Este exemplo demonstra como usar o componente `Swipeable` para adicionar a funcionalidade de deslizar para deletar em um FlatList."
+  },
+  "item_3": {
+    "title": "Drag and drop for reordering(Arrastar e Soltar para Reordenar)",
+    "description": "Este exemplo demonstra como usar o componente `Reorder` para adicionar a funcionalidade de arrastar e soltar em um FlatList."
+  },
+  "item_4": {
+    "title": "Lista Expansível(Lista Expansível)",
+    "description": "Este exemplo demonstra como usar o componente `ExpandableList` para adicionar a funcionalidade de lista expansível em um FlatList."
+  }
+}

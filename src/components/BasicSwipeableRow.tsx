@@ -3,9 +3,12 @@ import { Animated, StyleSheet, Text, View, I18nManager } from "react-native";
 import { RectButton, Swipeable } from "react-native-gesture-handler";
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  translations: {
+    something: string
+  }
 }
-interface State {}
+interface State { }
 
 export default class BasicSwipeableRow extends Component<Props, State> {
   private _swipeableRow: Swipeable | null = null;
@@ -13,7 +16,7 @@ export default class BasicSwipeableRow extends Component<Props, State> {
   renderLeftActions = (progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>) => {
     return (
       <RectButton style={styles.leftAction} onPress={this.close}>
-        <Text>Do something</Text>
+        <Text>{this.props.translations.something}</Text>
       </RectButton>
     );
   };

@@ -1,0 +1,9 @@
+{
+  "headerTitle": "Configurações",
+  "language": "Idioma",
+  "modalLanguages": {
+    "headerTitle": "Idiomas",
+    "portuguese": "Português",
+    "english": "Inglês"
+  }
+}

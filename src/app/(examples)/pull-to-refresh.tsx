@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
+import { FlatList, Linking, RefreshControl, StyleSheet, Text, View } from "react-native";
 
-const dummyData = [
-  {
-    title: "First Item",
-  },
-  {
-    title: "Second Item",
-  },
-];
 
 export default function PullToRefresh() {
+  const { t: translation } = useTranslation();
+
   const [refreshing, setRefreshing] = React.useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -21,14 +16,24 @@ export default function PullToRefresh() {
     }, 2000);
   }, []);
 
+  const dummyData = [
+    {
+      title: "First Item",
+    },
+    {
+      title: "Second Item",
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Pull to Refresh</Text>
       <Text style={styles.description}>
-        This example demonstrates how to use the `RefreshControl` component to
-        add pull-to-refresh functionality to a FlatList component.
+        {translation("examples.pullToRefresh.description")}
       </Text>
-      <Text style={{ paddingBottom: 6 }}>Pull down to refresh the list.</Text>
+      <Text style={{ paddingBottom: 6 }}>
+        {translation("examples.pullToRefresh.pullDown")}
+      </Text>
       <FlatList
         data={dummyData}
         renderItem={({ item }) => (
@@ -42,9 +47,19 @@ export default function PullToRefresh() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
-      <Text>
-        Example from the react native documentation at
-        https://reactnative.dev/docs/refreshcontrol
+      <Text style={{ textAlign: "center" }}>
+        {translation("examples.pullToRefresh.example")}
+        <Text
+          style={{
+            textDecorationLine: "underline",
+            color: "blue"
+          }}
+          onPress={() => Linking.openURL("https://reactnative.dev/docs/refreshcontrol")}
+        >
+          {" https://reactnative.dev/docs/refreshcontrol"}
+
+        </Text>
+
       </Text>
     </View>
   );

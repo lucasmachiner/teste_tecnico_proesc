@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View, Animated } from "react-native";
+import { FlatList, StyleSheet, Text, View, Animated, Linking } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
 import AppleStyleSwipeableRow from "@/components/AppleStyleSwipeableRow";
 import GmailStyleSwipeableRow from "@/components/GmailStyleSwipeableRow";
 import BasicSwipeableRow from "@/components/BasicSwipeableRow";
+import { useTranslation } from "react-i18next";
 
 type Data = {
   title: string;
@@ -20,25 +21,24 @@ type SwipeableRowProps = {
   index: number;
 };
 
-const DATA: Data[] = [
-  {
-    title: "Swipe left",
-    content:
-      "<BasicSwipeableRow> is a basic example of swipeable row. It has only left actions",
-  },
-  {
-    title: "Swipe left or right",
-    content:
-      "<AppleStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on iOS",
-  },
-  {
-    title: "Swipe left or right",
-    content:
-      "<GmailStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on Android",
-  },
-];
-
 export default function SwipeToDelete() {
+  const { t: translation } = useTranslation();
+
+  const DATA: Data[] = [
+    {
+      title: translation('examples.swipeToDelete.data.swipeLeft.title'),
+      content: translation('examples.swipeToDelete.data.swipeLeft.content'),
+    },
+    {
+      title: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.title'),
+      content: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.content'),
+    },
+    {
+      title: translation('examples.swipeToDelete.data.swipeLeftOrRight_2.title'),
+      content: translation('examples.swipeToDelete.data.swipeLeftOrRight_2.content'),
+    },
+  ];
+
   const Row = ({ item }: RowProps) => (
     <RectButton style={styles.rectButton} onPress={() => alert(item.title)}>
       <Text style={styles.titleText}>{item.title}</Text>
@@ -51,19 +51,32 @@ export default function SwipeToDelete() {
   const SwipeableRow = ({ item, index }: SwipeableRowProps) => {
     if (index == 0) {
       return (
-        <BasicSwipeableRow>
+        <BasicSwipeableRow
+          translations={{ something: translation("examples.swipeToDelete.data.swipeLeft.something") }}
+        >
           <Row item={item} />
         </BasicSwipeableRow>
       );
     } else if (index % 2 === 0) {
       return (
-        <AppleStyleSwipeableRow>
+        <AppleStyleSwipeableRow
+          translations={{
+            archive: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.archive"),
+            flag: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.flag"),
+            more: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.more")
+          }}
+        >
           <Row item={item} />
         </AppleStyleSwipeableRow>
       );
     } else {
       return (
-        <GmailStyleSwipeableRow>
+        <GmailStyleSwipeableRow
+          translations={{
+            something: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.something'),
+            delete: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.delete')
+          }}
+        >
           <Row item={item} />
         </GmailStyleSwipeableRow>
       );
@@ -74,11 +87,11 @@ export default function SwipeToDelete() {
     <View style={styles.container}>
       <Text style={styles.title}>Swipe To Delete</Text>
       <Text style={styles.description}>
-        This example demonstrates how to use the `Swipeable` component title the
-        'react-native-gesture-handler' library to add swipe-to-do-something
-        functionality to list of items
+        {translation('examples.swipeToDelete.description')}
       </Text>
-      <Text style={{ paddingBottom: 10 }}>Swipe on the items </Text>
+      <Text style={{ paddingBottom: 10 }}>
+        {translation('examples.swipeToDelete.swipItems')}
+      </Text>
       <View style={styles.data_container}>
         <FlatList
           data={DATA}
@@ -90,9 +103,17 @@ export default function SwipeToDelete() {
         />
       </View>
 
-      <Text>
-        Example title the react-native-gesture-handler documentation at
-        https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios
+      <Text style={{ textAlign: "center" }}>
+        {translation('examples.swipeToDelete.example')}
+        <Text
+          onPress={() => Linking.openURL("https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios")}
+          style={{
+            textDecorationLine: "underline",
+            color: "blue"
+          }}
+        >
+          {" https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios"}
+        </Text>
       </Text>
     </View>
   );
