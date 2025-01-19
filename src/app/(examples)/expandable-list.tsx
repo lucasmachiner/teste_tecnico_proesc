@@ -1,78 +1,50 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View, Animated } from "react-native";
+import { FlatList, StyleSheet, Text, View, Animated, Linking } from "react-native";
 import ExpandableContainer from "@/components/ExpandableContainer";
 import Separator from "@/components/Separator";
-const steps = [
-  {
-    title: "Step 1",
-    content: "This is the content of step 1",
-  },
-  {
-    title: "Step 2",
-    content: "This is the content of step 2",
-  },
-  {
-    title: "Step 3",
-    content: "This is the content of step 3",
-  },
-  {
-    title: "Step 4",
-    content: "This is the content of step 4",
-  },
-  {
-    title: "Step 5",
-    content: "This is the content of step 5",
-  },
-  {
-    title: "Step 6",
-    content: "This is the content of step 6",
-  },
-  {
-    title: "Step 7",
-    content: "This is the content of step 7",
-  },
-  {
-    title: "Step 8",
-    content: "This is the content of step 8",
-  },
-  {
-    title: "Step 9",
-    content: "This is the content of step 9",
-  },
-  {
-    title: "Step 10",
-    content: "This is the content of step 10",
-  },
+import { useTranslation } from "react-i18next";
 
-];
+type DataType = {
+  title: string;
+  content: string;
+};
+
 
 export default function SwipeToDelete() {
+  const { t: translation } = useTranslation();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Expandable list</Text>
       <Text style={styles.description}>
-        This example demonstrates a list of expandable items, using reanimated
-        for the animation.
+        {translation("examples.expandableList.description")}
       </Text>
       <FlatList
         style={styles.data_container}
-        data={steps}
+        data={Array<DataType>(10)}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View key={index}>
-            <ExpandableContainer title={item.title}>
+            <ExpandableContainer title={translation("examples.expandableList.step.title", { value: index + 1 })}>
               <Text style={{ padding: 10 }}>
-              {item.content}</Text>
+                {translation("examples.expandableList.step.content", { value: index + 1 })}
+              </Text>
             </ExpandableContainer>
-            {index !== steps.length - 1 && <Separator />}
+            {index !== Array<DataType>(10).length - 1 && <Separator />}
           </View>
         )}
       />
-
-      <Text>
-        Example from the react-native-gesture-handler documentation at
-        https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios
+      <Text style={{ textAlign: "center", paddingTop: 8, }}>
+        {translation("examples.expandableList.example")}
+        <Text
+          onPress={() => Linking.openURL("https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios")}
+          style={{
+            textDecorationLine: "underline",
+            color: "blue"
+          }}
+        >
+          {" https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios"}
+        </Text>
       </Text>
     </View>
   );
