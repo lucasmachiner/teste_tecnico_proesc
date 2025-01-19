@@ -15,15 +15,21 @@
     "data": {
       "swipeLeft": {
         "title": "Swipe left",
-        "content": "<BasicSwipeableRow> is a basic example of swipeable row. It has only left actions"
+        "content": "<BasicSwipeableRow> is a basic example of swipeable row. It has only left actions",
+        "something": "Do something"
       },
       "swipeLeftOrRight_1": {
         "title": "Swipe left or right",
-        "content": "<AppleStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on iOS"
+        "content": "<AppleStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on iOS",
+        "something": "Do something",
+        "delete": "Delete"
       },
       "swipeLeftOrRight_2": {
         "title": "Swipe left or right",
-        "content": "<GmailStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on Android"
+        "content": "<GmailStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on Android",
+        "archive": "Archive",
+        "more": "More",
+        "flag": "Flag"
       }
     }
   },

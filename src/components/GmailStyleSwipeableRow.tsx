@@ -4,9 +4,13 @@ import { RectButton, Swipeable } from "react-native-gesture-handler";
 
 // Define Props and State types if needed. For now, they are empty.
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  translations: {
+    something: string,
+    delete: string,
+  }
 }
-interface State {}
+interface State { }
 
 export default class GmailStyleSwipeableRow extends Component<Props, State> {
   private _swipeableRow: Swipeable | null = null;
@@ -19,7 +23,7 @@ export default class GmailStyleSwipeableRow extends Component<Props, State> {
     });
     return (
       <RectButton style={styles.leftAction} onPress={this.close}>
-        <Text>Do something</Text>
+        <Text>{this.props.translations.something}</Text>
       </RectButton>
     );
   };
@@ -32,7 +36,7 @@ export default class GmailStyleSwipeableRow extends Component<Props, State> {
     });
     return (
       <RectButton style={styles.rightAction} onPress={this.close}>
-        <Text>Delete</Text>
+        <Text>{this.props.translations.delete}</Text>
       </RectButton>
     );
   };

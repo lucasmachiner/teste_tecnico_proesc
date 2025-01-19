@@ -51,19 +51,32 @@ export default function SwipeToDelete() {
   const SwipeableRow = ({ item, index }: SwipeableRowProps) => {
     if (index == 0) {
       return (
-        <BasicSwipeableRow>
+        <BasicSwipeableRow
+          translations={{ something: translation("examples.swipeToDelete.data.swipeLeft.something") }}
+        >
           <Row item={item} />
         </BasicSwipeableRow>
       );
     } else if (index % 2 === 0) {
       return (
-        <AppleStyleSwipeableRow>
+        <AppleStyleSwipeableRow
+          translations={{
+            archive: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.archive"),
+            flag: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.flag"),
+            more: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.more")
+          }}
+        >
           <Row item={item} />
         </AppleStyleSwipeableRow>
       );
     } else {
       return (
-        <GmailStyleSwipeableRow>
+        <GmailStyleSwipeableRow
+          translations={{
+            something: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.something'),
+            delete: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.delete')
+          }}
+        >
           <Row item={item} />
         </GmailStyleSwipeableRow>
       );

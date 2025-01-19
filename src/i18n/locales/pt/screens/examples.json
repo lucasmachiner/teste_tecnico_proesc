@@ -15,15 +15,21 @@
     "data": {
       "swipeLeft": {
         "title": "Deslize para a esquerda",
-        "content": "<BasicSwipeableRow> é um exemplo básico de linha deslizável. Ele possui apenas ações à esquerda."
+        "content": "<BasicSwipeableRow> é um exemplo básico de linha deslizável. Ele possui apenas ações à esquerda",
+        "something": "Fazer algo"
       },
       "swipeLeftOrRight_1": {
-        "title": "Deslize para a esquerda ou direita",
-        "content": "<AppleStyleSwipeableRow> é um exemplo de linha deslizável com ações à esquerda e à direita, semelhante ao aplicativo nativo de e-mail no iOS."
+        "title": "Deslize para a esquerda ou para a direita",
+        "content": "<AppleStyleSwipeableRow> é um exemplo de linha deslizável com ações tanto à esquerda quanto à direita, semelhante ao aplicativo de e-mail nativo no iOS",
+        "something": "Fazer algo",
+        "delete": "Excluir"
       },
       "swipeLeftOrRight_2": {
-        "title": "Deslize para a esquerda ou direita",
-        "content": "<GmailStyleSwipeableRow> é um exemplo de linha deslizável com ações à esquerda e à direita, semelhante ao aplicativo nativo de e-mail no Android."
+        "title": "Deslize para a esquerda ou para a direita",
+        "content": "<GmailStyleSwipeableRow> é um exemplo de linha deslizável com ações tanto à esquerda quanto à direita, semelhante ao aplicativo de e-mail nativo no Android",
+        "archive": "Arquivar",
+        "more": "Mais",
+        "flag": "Marcar"
       }
     }
   },
