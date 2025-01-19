@@ -1,0 +1,47 @@
+{
+  "pullToRefresh": {
+    "description": "This example demonstrates how to use the `RefreshControl` component to add pull-to-refresh functionality to a FlatList component.",
+    "pullDown": "Pull down to refresh the list.",
+    "example": "Example from the react native documentation at",
+    "dummyData": {
+      "firstItem": "First Item",
+      "secondItem": "Second Item"
+    }
+  },
+  "swipeToDelete": {
+    "description": "This example demonstrates how to use the `Swipeable` component title the 'react-native-gesture-handler' library to add swipe-to-do-something functionality to list of items",
+    "swipItems": "Swipe on the items",
+    "example": "Example title the react-native-gesture-handler documentation at",
+    "data": {
+      "swipeLeft": {
+        "title": "Swipe left",
+        "content": "<BasicSwipeableRow> is a basic example of swipeable row. It has only left actions"
+      },
+      "swipeLeftOrRight_1": {
+        "title": "Swipe left or right",
+        "content": "<AppleStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on iOS"
+      },
+      "swipeLeftOrRight_2": {
+        "title": "Swipe left or right",
+        "content": "<GmailStyleSwipeableRow> is an example of swipeable row with both left and right actions, similar to the native mail app on Android"
+      }
+    }
+  },
+  "dragAndDrop": {
+    "description": "This examples uses the library react-native-draggable-flatlist to add drag and drop functionality to a FlatList component.",
+    "reorder": "Long press any item to reorder",
+    "example": " Example from the react-native-draggable-flatlist documentation at",
+    "data": {
+      "product_1": "Product 1",
+      "product_2": "Product 2"
+    }
+  },
+  "expandableList": {
+    "description": "This example demonstrates a list of expandable items, using reanimated for the animation.",
+    "example": "Example from the react-native-gesture-handler documentation at",
+    "step": {
+      "title": "Step {{value}}",
+      "content": "This is the content of step {{value}}"
+    }
+  }
+}

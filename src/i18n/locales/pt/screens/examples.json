@@ -1,0 +1,47 @@
+{
+  "pullToRefresh": {
+    "description": "Este exemplo demonstra como usar o componente `RefreshControl` para adicionar a funcionalidade de puxar para atualizar a um componente FlatList.",
+    "pullDown": "Puxe para baixo para atualizar a lista.",
+    "example": "Exemplo da documentação do React Native em",
+    "dummyData": {
+      "firstItem": "Primeiro Item",
+      "secondItem": "Segundo Item"
+    }
+  },
+  "swipeToDelete": {
+    "description": "Este exemplo demonstra como usar o componente `Swipeable` da biblioteca 'react-native-gesture-handler' para adicionar a funcionalidade de deslizar para realizar uma ação em uma lista de itens.",
+    "swipItems": "Deslize nos itens",
+    "example": "Exemplo da documentação do react-native-gesture-handler em",
+    "data": {
+      "swipeLeft": {
+        "title": "Deslize para a esquerda",
+        "content": "<BasicSwipeableRow> é um exemplo básico de linha deslizável. Ele possui apenas ações à esquerda."
+      },
+      "swipeLeftOrRight_1": {
+        "title": "Deslize para a esquerda ou direita",
+        "content": "<AppleStyleSwipeableRow> é um exemplo de linha deslizável com ações à esquerda e à direita, semelhante ao aplicativo nativo de e-mail no iOS."
+      },
+      "swipeLeftOrRight_2": {
+        "title": "Deslize para a esquerda ou direita",
+        "content": "<GmailStyleSwipeableRow> é um exemplo de linha deslizável com ações à esquerda e à direita, semelhante ao aplicativo nativo de e-mail no Android."
+      }
+    }
+  },
+  "dragAndDrop": {
+    "description": "Este exemplo utiliza a biblioteca react-native-draggable-flatlist para adicionar funcionalidade de arrastar e soltar a um componente FlatList.",
+    "reorder": "Pressione e segure qualquer item para reorganizar",
+    "example": "Exemplo da documentação do react-native-draggable-flatlist em",
+    "data": {
+      "product_1": "Produto 1",
+      "product_2": "Produto 2"
+    }
+  },
+  "expandableList": {
+    "description": "Este exemplo demonstra uma lista de itens expansíveis, usando reanimated para a animação.",
+    "example": "Exemplo da documentação do react-native-gesture-handler em",
+    "step": {
+      "title": "Passo {{value}}",
+      "content": "Este é o conteúdo do passo {{value}}"
+    }
+  }
+}
