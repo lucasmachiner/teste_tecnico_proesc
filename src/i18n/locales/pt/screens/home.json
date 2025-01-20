@@ -15,7 +15,7 @@
     "description": "Este exemplo demonstra como usar o componente `Reorder` para adicionar a funcionalidade de arrastar e soltar em um FlatList."
   },
   "item_4": {
-    "title": "Lista Expansível(Lista Expansível)",
+    "title": "Expandable list(Lista Expansível)",
     "description": "Este exemplo demonstra como usar o componente `ExpandableList` para adicionar a funcionalidade de lista expansível em um FlatList."
   }
 }

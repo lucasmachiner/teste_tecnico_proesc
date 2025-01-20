@@ -5,5 +5,11 @@
     "headerTitle": "Languages",
     "portuguese": "Portuguese",
     "english": "English"
+  },
+  "modalChangeTheme": {
+    "headerTitle": "Change Theme",
+    "label": "{{enabled}} dark mode",
+    "enable": "Enable",
+    "disable": "Disable"
   }
 }
