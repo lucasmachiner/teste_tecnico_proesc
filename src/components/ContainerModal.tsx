@@ -2,6 +2,8 @@ import { useRouter } from 'expo-router';
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useTheme } from '@/theme';
+import { ThemeColors } from '@/theme/colors';
 
 type ContainerModalProps = {
   children: React.ReactNode;
@@ -11,15 +13,17 @@ type ContainerModalProps = {
 
 export default function ContainerModal({ children, title }: ContainerModalProps,) {
   const navigation = useRouter();
+  const { theme } = useTheme();
+
   return (
     <Animated.View
       entering={FadeIn}
-      style={styles.container}
+      style={styles(theme).container}
     >
       <Pressable style={StyleSheet.absoluteFill} onPress={() => navigation.back()} />
       <Animated.View
         entering={SlideInDown}
-        style={styles.contentAnimeted}
+        style={styles(theme).contentAnimeted}
       >
         <View style={{
           width: "100%"
@@ -27,7 +31,8 @@ export default function ContainerModal({ children, title }: ContainerModalProps,
           <Text style={{
             textAlign: "center",
             fontSize: 24,
-            fontWeight: "600"
+            fontWeight: "600",
+            color: ThemeColors(theme).text
           }}>
             {title}
           </Text>
@@ -35,9 +40,8 @@ export default function ContainerModal({ children, title }: ContainerModalProps,
             style={{ position: 'absolute', right: 0, top: 0 }}
             onPress={() => navigation.back()}
           >
-            <Ionicons name="close" size={24} color="black" />
+            <Ionicons name="close" size={24} color={ThemeColors(theme).text} />
           </TouchableOpacity>
-
         </View>
         {children}
       </Animated.View>
@@ -45,18 +49,18 @@ export default function ContainerModal({ children, title }: ContainerModalProps,
   )
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#00000040',
+    backgroundColor: ThemeColors(theme).transparent,
   },
   contentAnimeted: {
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: ThemeColors(theme).background,
     borderTopRightRadius: 24,
     borderTopLeftRadius: 24,
     padding: 16

@@ -5,5 +5,11 @@
     "headerTitle": "Idiomas",
     "portuguese": "Português",
     "english": "Inglês"
+  },
+  "modalChangeTheme": {
+    "headerTitle": "Alterar tema",
+    "label": "{{enabled}} modo escuro",
+    "enable": "Ativar",
+    "disable": "Desativar"
   }
 }

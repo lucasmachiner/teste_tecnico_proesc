@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View, Animated, Linking } from "react-native";
+import React, { useEffect } from "react";
+import { FlatList, StyleSheet, Text, View, Linking } from "react-native";
 import ExpandableContainer from "@/components/ExpandableContainer";
 import Separator from "@/components/Separator";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
+import { useNavigation } from "expo-router";
 
 type DataType = {
   title: string;
@@ -12,35 +15,53 @@ type DataType = {
 
 export default function SwipeToDelete() {
   const { t: translation } = useTranslation();
+  const { theme } = useTheme();
+  const navigation = useNavigation();
+
+  const data = Array<DataType>(10);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
+
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Expandable list</Text>
-      <Text style={styles.description}>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Expandable list</Text>
+      <Text style={styles(theme).description}>
         {translation("examples.expandableList.description")}
       </Text>
       <FlatList
-        style={styles.data_container}
-        data={Array<DataType>(10)}
+        style={styles(theme).data_container}
+        data={data}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <View key={index}>
             <ExpandableContainer title={translation("examples.expandableList.step.title", { value: index + 1 })}>
-              <Text style={{ padding: 10 }}>
+              <Text style={{ padding: 10, color: ThemeColors(theme).text }}>
                 {translation("examples.expandableList.step.content", { value: index + 1 })}
               </Text>
             </ExpandableContainer>
-            {index !== Array<DataType>(10).length - 1 && <Separator />}
+            {index !== data.length - 1 && <Separator />}
           </View>
         )}
       />
-      <Text style={{ textAlign: "center", paddingTop: 8, }}>
+      <Text style={{ textAlign: "center", paddingTop: 8, color: ThemeColors(theme).text }}>
         {translation("examples.expandableList.example")}
         <Text
           onPress={() => Linking.openURL("https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios")}
           style={{
             textDecorationLine: "underline",
-            color: "blue"
+            color: ThemeColors(theme).textDecorationLine,
           }}
         >
           {" https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios"}
@@ -50,12 +71,13 @@ export default function SwipeToDelete() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
+    backgroundColor: ThemeColors(theme).background
   },
   data_container: {
     flex: 1,
@@ -64,31 +86,32 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: ThemeColors(theme).text,
   },
   description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
     textAlign: "center",
     marginVertical: 20,
   },
   item: {
     width: "auto",
     height: 100,
-    backgroundColor: "pink",
     marginVertical: 8,
     marginHorizontal: 16,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 6,
+    backgroundColor: ThemeColors(theme).item
   },
   leftAction: {
     flex: 1,
-    backgroundColor: "#388e3c",
+    backgroundColor: ThemeColors(theme).leftActionGreen,
     justifyContent: "center",
   },
   actionText: {
-    color: "white",
+    color: ThemeColors(theme).primary,
     fontWeight: "600",
     padding: 20,
   },
@@ -100,10 +123,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-around",
     flexDirection: "column",
-    backgroundColor: "white",
+    //TODO -> aqui - primary
+    backgroundColor: ThemeColors(theme).primary,
   },
   separator: {
-    backgroundColor: "rgb(200, 199, 204)",
+    backgroundColor: ThemeColors(theme).separator,
     height: StyleSheet.hairlineWidth,
   },
   fromText: {
@@ -111,28 +135,29 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   messageText: {
-    color: "#999",
+    //TODO -> aqui - transparent
+    color: ThemeColors(theme).message,
     backgroundColor: "transparent",
   },
   dateText: {
+    //TODO -> aqui - transparent
     backgroundColor: "transparent",
     position: "absolute",
     right: 20,
     top: 10,
-    color: "#999",
+    color: ThemeColors(theme).message,
     fontWeight: "bold",
   },
 
   FaqContainerStyle: {
-    // width: '100%',
-    backgroundColor: "white",
+    backgroundColor: ThemeColors(theme).primary,
     flexDirection: "column",
     margin: 10,
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
     shadowRadius: 10,
-    shadowColor: "grey",
+    shadowColor: ThemeColors(theme).description,
     shadowOpacity: 0.23,
     shadowOffset: { width: -2, height: 4 },
     borderRadius: 10,

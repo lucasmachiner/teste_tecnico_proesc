@@ -1,5 +1,5 @@
+import { ThemeColors } from '@/theme/colors';
 import React, { Component } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Animated, StyleSheet, Text, View, I18nManager } from 'react-native';
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
 
@@ -10,6 +10,7 @@ type Props = {
     more: string,
     flag: string,
   };
+  theme: string,
 }; // Add props types here if needed
 type State = {}; // Add state types here if needed
 
@@ -22,8 +23,8 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
       outputRange: [-20, 0, 0, 1],
     });
     return (
-      <RectButton style={styles.leftAction} onPress={this.close}>
-        <Animated.Text style={[styles.actionText]}>
+      <RectButton style={styles(this.props.theme).leftAction} onPress={this.close}>
+        <Animated.Text style={[styles(this.props.theme).actionText]}>
           {this.props.translations.archive}
 
         </Animated.Text>
@@ -46,8 +47,8 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
 
     return (
       <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
-        <RectButton style={[styles.rightAction, { backgroundColor: color }]} onPress={pressHandler}>
-          <Text style={styles.actionText}>{text}</Text>
+        <RectButton style={[styles(this.props.theme).rightAction, { backgroundColor: color }]} onPress={pressHandler}>
+          <Text style={styles(this.props.theme).actionText}>{text}</Text>
         </RectButton>
       </Animated.View>
     );
@@ -55,9 +56,9 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
 
   renderRightActions = (progress: Animated.AnimatedInterpolation<number>) => (
     <View style={{ width: 192, flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row' }}>
-      {this.renderRightAction(this.props.translations.more, '#C8C7CD', 192, progress)}
-      {this.renderRightAction(this.props.translations.flag, '#ffab00', 128, progress)}
-      {this.renderRightAction(this.props.translations.more, '#dd2c00', 64, progress)}
+      {this.renderRightAction(this.props.translations.more, ThemeColors(this.props.theme).grey, 192, progress)}
+      {this.renderRightAction(this.props.translations.flag, ThemeColors(this.props.theme).yellow, 128, progress)}
+      {this.renderRightAction(this.props.translations.more, ThemeColors(this.props.theme).red, 64, progress)}
     </View>
   );
 
@@ -87,14 +88,14 @@ export default class AppleStyleSwipeableRow extends Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   leftAction: {
     flex: 1,
-    backgroundColor: '#497AFC',
+    backgroundColor: ThemeColors(theme).leftActionBlue,
     justifyContent: 'center',
   },
   actionText: {
-    color: 'white',
+    color: ThemeColors(theme).text,
     fontSize: 16,
     backgroundColor: 'transparent',
     padding: 10,

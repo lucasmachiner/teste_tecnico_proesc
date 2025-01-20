@@ -7,27 +7,31 @@ import {
 import { Link } from "expo-router";
 import Badge from "@/components/Badge";
 import { RenderItemParams } from "@/types";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
 
 
 export default function RenderItem({ item, index }: RenderItemParams) {
+  const { theme } = useTheme();
+
   return (
     <Link
       key={index}
       asChild
-      style={styles.item}
+      style={styles(theme).item}
       href={{ pathname: item.route, params: { name: item.title } }}
     >
       <TouchableOpacity disabled={item.isComingSoon}>
-        <View style={styles.container}>
+        <View style={styles(theme).container}>
           <View
-            style={styles.content_item_title}
+            style={styles(theme).content_item_title}
           >
-            <Text style={styles.item_title}>{item.title}</Text>
+            <Text style={styles(theme).item_title}>{item.title}</Text>
           </View>
 
-          <Text style={styles.item_description}>{item.description}</Text>
+          <Text style={styles(theme).item_description}>{item.description}</Text>
           <View
-            style={styles.content_badges}
+            style={styles(theme).content_badges}
           >
             {item.badges &&
               item.badges.map((badge, index) => {
@@ -46,7 +50,7 @@ export default function RenderItem({ item, index }: RenderItemParams) {
   )
 };
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
@@ -54,8 +58,8 @@ const styles = StyleSheet.create({
   },
   item: {
     height: "auto",
-    backgroundColor: "#FFFE",
-    borderColor: "gray",
+    backgroundColor: ThemeColors(theme).item,
+    borderColor: ThemeColors(theme).border,
     borderWidth: 1,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -70,10 +74,11 @@ const styles = StyleSheet.create({
   item_title: {
     fontSize: 18,
     fontWeight: "bold",
+    color: ThemeColors(theme).text,
   },
   item_description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
   },
   content_badges: {
     display: "flex",

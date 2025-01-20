@@ -1,7 +1,9 @@
 import { ReactNode, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Animated, {SlideInDown, FlipInEasyY, SlideInLeft, SlideInRight} from "react-native-reanimated";
+import Animated, { SlideInLeft } from "react-native-reanimated";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
 
 interface ExpandableContainerProps {
   title: string;
@@ -16,22 +18,24 @@ const ExpandableContainer: React.FC<ExpandableContainerProps> & {
   Description: React.FC<DescriptionProps>;
 } = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useTheme();
+
 
   const handlePress = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handlePress}>
-      <View style={styles.header}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{title}</Text>
+    <TouchableOpacity style={styles(theme).container} onPress={handlePress}>
+      <View style={styles(theme).header}>
+        <View style={styles(theme).titleContainer}>
+          <Text style={styles(theme).title}>{title}</Text>
         </View>
-        <AntDesign name={isOpen ? "up" : "down"} size={24} color="black" />
+        <AntDesign name={isOpen ? "up" : "down"} size={24} color={ThemeColors(theme).text} />
       </View>
       {isOpen && (
         <Animated.View
-        entering={SlideInLeft.duration(500)}
+          entering={SlideInLeft.duration(500)}
         >
           {children}
         </Animated.View>
@@ -44,18 +48,19 @@ ExpandableContainer.Description = ({ children }: DescriptionProps) => (
   <Text>{children}</Text>
 );
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: ThemeColors(theme).item,
   },
   title: {
     fontSize: 16,
     fontWeight: "normal",
+    color: ThemeColors(theme).text
   },
   description: {
     fontSize: 14,
-    color: "gray",
+    color: ThemeColors(theme).description,
   },
   header: {
     flexDirection: "row",
@@ -66,6 +71,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
     marginRight: 10,
+
   },
 });
 
