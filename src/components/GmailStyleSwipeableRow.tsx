@@ -1,3 +1,4 @@
+import { ThemeColors } from "@/theme/colors";
 import React, { Component } from "react";
 import { Animated, StyleSheet, Text, View, I18nManager } from "react-native";
 import { RectButton, Swipeable } from "react-native-gesture-handler";
@@ -8,7 +9,8 @@ interface Props {
   translations: {
     something: string,
     delete: string,
-  }
+  },
+  theme: string,
 }
 interface State { }
 
@@ -22,8 +24,10 @@ export default class GmailStyleSwipeableRow extends Component<Props, State> {
       extrapolate: "clamp",
     });
     return (
-      <RectButton style={styles.leftAction} onPress={this.close}>
-        <Text>{this.props.translations.something}</Text>
+      <RectButton style={styles(this.props.theme).leftAction} onPress={this.close}>
+        <Text style={styles(this.props.theme).text}>
+          {this.props.translations.something}
+        </Text>
       </RectButton>
     );
   };
@@ -35,8 +39,10 @@ export default class GmailStyleSwipeableRow extends Component<Props, State> {
       extrapolate: "clamp",
     });
     return (
-      <RectButton style={styles.rightAction} onPress={this.close}>
-        <Text>{this.props.translations.delete}</Text>
+      <RectButton style={styles(this.props.theme).rightAction} onPress={this.close}>
+        <Text style={styles(this.props.theme).text}>
+          {this.props.translations.delete}
+        </Text>
       </RectButton>
     );
   };
@@ -68,10 +74,10 @@ export default class GmailStyleSwipeableRow extends Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   leftAction: {
     flex: 1,
-    backgroundColor: "#388e3c",
+    backgroundColor: ThemeColors(theme).leftActionGreen,
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: I18nManager.isRTL ? "row" : "row-reverse",
@@ -83,8 +89,11 @@ const styles = StyleSheet.create({
   rightAction: {
     alignItems: "center",
     flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
-    backgroundColor: "#dd2c00",
+    backgroundColor: ThemeColors(theme).red,
     flex: 1,
     justifyContent: "flex-end",
   },
+  text: {
+    color: ThemeColors(theme).text,
+  }
 });

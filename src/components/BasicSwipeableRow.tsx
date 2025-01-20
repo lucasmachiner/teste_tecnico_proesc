@@ -1,3 +1,4 @@
+import { ThemeColors } from "@/theme/colors";
 import React, { Component } from "react";
 import { Animated, StyleSheet, Text, View, I18nManager } from "react-native";
 import { RectButton, Swipeable } from "react-native-gesture-handler";
@@ -6,7 +7,8 @@ interface Props {
   children: React.ReactNode;
   translations: {
     something: string
-  }
+  },
+  theme: string,
 }
 interface State { }
 
@@ -15,8 +17,10 @@ export default class BasicSwipeableRow extends Component<Props, State> {
 
   renderLeftActions = (progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>) => {
     return (
-      <RectButton style={styles.leftAction} onPress={this.close}>
-        <Text>{this.props.translations.something}</Text>
+      <RectButton style={styles(this.props.theme).leftAction} onPress={this.close}>
+        <Text style={styles(this.props.theme).text}>
+          {this.props.translations.something}
+        </Text>
       </RectButton>
     );
   };
@@ -45,10 +49,10 @@ export default class BasicSwipeableRow extends Component<Props, State> {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   leftAction: {
     flex: 1,
-    backgroundColor: "#388e3c",
+    backgroundColor: ThemeColors(theme).leftActionGreen,
     justifyContent: "flex-end",
     alignItems: "center",
     flexDirection: I18nManager.isRTL ? "row" : "row-reverse",
@@ -57,4 +61,7 @@ const styles = StyleSheet.create({
     width: 30,
     marginHorizontal: 10,
   },
+  text: {
+    color: ThemeColors(theme).text
+  }
 });

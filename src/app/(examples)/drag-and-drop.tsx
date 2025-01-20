@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from "react";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   View,
@@ -10,7 +12,7 @@ import {
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
-
+import { useNavigation } from "expo-router";
 
 type Item = {
   key: string;
@@ -19,6 +21,8 @@ type Item = {
 
 function DragAndDrop() {
   const { t: translation } = useTranslation();
+  const { theme } = useTheme();
+  const navigation = useNavigation();
 
   const DATA = [
     {
@@ -37,10 +41,10 @@ function DragAndDrop() {
     ({ item, drag, isActive }: RenderItemParams<Item>) => {
       return (
         <TouchableOpacity
-          style={isActive ? styles.active_button : styles.button}
+          style={isActive ? styles(theme).active_button : styles(theme).button}
           onLongPress={drag}
         >
-          <Text style={styles.label}>{item.label} 🖐️</Text>
+          <Text style={styles(theme).label}>{item.label} 🖐️</Text>
           {/* reorder icon */}
         </TouchableOpacity>
       );
@@ -48,22 +52,36 @@ function DragAndDrop() {
     []
   );
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [translation, theme])
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Drag and drop to reorder</Text>
-      <Text style={styles.description}>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Drag and drop to reorder</Text>
+      <Text style={styles(theme).description}>
         {translation('examples.dragAndDrop.description')}
       </Text>
-      <Text style={{ paddingBottom: 10 }}>
+      <Text style={{ paddingBottom: 10, color: ThemeColors(theme).text }}>
         {translation("examples.dragAndDrop.reorder")}
       </Text>
-      <Text style={{ paddingBottom: 8, textAlign: "center" }}>
+      <Text style={{ paddingBottom: 8, textAlign: "center", color: ThemeColors(theme).text }}>
         {translation("examples.dragAndDrop.example")}
         <Text
           onPress={() => Linking.openURL("https://github.com/computerjazz/react-native-draggable-flatlist")}
           style={{
             textDecorationLine: "underline",
-            color: "blue"
+            color: ThemeColors(theme).textDecorationLine,
           }}
         >
           {" https://github.com/computerjazz/react-native-draggable-flatlist"}
@@ -73,26 +91,28 @@ function DragAndDrop() {
         data={data}
         renderItem={renderItem}
         keyExtractor={(item, index) => `draggable-item-${item.key}`}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ItemSeparatorComponent={() => <View style={styles(theme).separator} />}
         onDragEnd={({ data }) => setData(data)}
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     padding: 20,
+    backgroundColor: ThemeColors(theme).background
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: ThemeColors(theme).text
   },
   description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
     textAlign: "center",
     marginVertical: 20,
   },
@@ -104,10 +124,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-around",
     flexDirection: "column",
-    backgroundColor: "white",
+    backgroundColor: ThemeColors(theme).item,
   },
   separator: {
-    backgroundColor: "rgb(200, 199, 204)",
+    backgroundColor: ThemeColors(theme).separator,
     height: StyleSheet.hairlineWidth,
   },
   active_button: {
@@ -118,10 +138,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-around",
     flexDirection: "column",
-    backgroundColor: "lightgray",
+    backgroundColor: ThemeColors(theme).item,
   },
   label: {
     fontWeight: "bold",
+    color: ThemeColors(theme).text
   },
 });
 

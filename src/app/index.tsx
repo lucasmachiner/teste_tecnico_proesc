@@ -9,6 +9,10 @@ import {
 import { useTranslation } from "react-i18next";
 import { Item } from "@/types";
 import RenderItem from "@/components/RenderItem";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
+import { useEffect } from "react";
+import { useNavigation } from "expo-router";
 
 //Initialize translations
 import "@/i18n";
@@ -17,6 +21,8 @@ import "@/i18n";
 
 export default function App() {
   const { t: translation } = useTranslation();
+  const { theme } = useTheme();
+  const navigation = useNavigation();
 
   const data: Item[] = [
     {
@@ -71,13 +77,26 @@ export default function App() {
     },
   ];
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [translation, theme])
+
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: ThemeColors(theme).background }}>
       <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.title}>React Native Basics</Text>
-          <Text style={styles.description}>
+        <View style={styles(theme).container}>
+          <Text style={styles(theme).title}>React Native Basics</Text>
+          <Text style={styles(theme).description}>
             {translation('home.subtitle')}
           </Text>
         </View>
@@ -90,26 +109,28 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     padding: 20,
+    backgroundColor: ThemeColors(theme).background
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: ThemeColors(theme).text
   },
   description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
     textAlign: "center",
     marginVertical: 20,
   },
   item: {
     height: "auto",
-    backgroundColor: "#FFFE",
-    borderColor: "gray",
+    backgroundColor: ThemeColors(theme).item,
+    borderColor: ThemeColors(theme).border,
     borderWidth: 1,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -121,6 +142,6 @@ const styles = StyleSheet.create({
   },
   item_description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
   },
 });

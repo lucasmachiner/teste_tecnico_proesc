@@ -1,3 +1,5 @@
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
 import { StyleSheet, Text, View } from "react-native";
 
 type BadgeProps = {
@@ -6,17 +8,19 @@ type BadgeProps = {
 };
 
 export default function Badge({ label, variant = "primary" }: BadgeProps) {
+  const { theme } = useTheme();
+
   return (
-    <View style={[styles.badge]}>
-      <View style={[styles.circle, styles[variant]]}></View>
-      <Text style={styles.badgeLabel}>{label}</Text>
+    <View style={[styles(theme).badge]}>
+      <View style={[styles(theme).circle, styles(theme)[variant]]}></View>
+      <Text style={styles(theme).badgeLabel}>{label}</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   badge: {
-    borderColor: "gray",
+    borderColor: ThemeColors(theme).border,
     borderWidth: 1,
     display: "flex",
     flexDirection: "row",
@@ -25,13 +29,13 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   badgeLabel: {
-    color: "black",
+    color: ThemeColors(theme).text,
   },
   primary: {
-    backgroundColor: "violet",
+    backgroundColor: ThemeColors(theme).third,
   },
   secondary: {
-    backgroundColor: "blue",
+    backgroundColor: ThemeColors(theme).secondary,
   },
   circle: {
     width: 10,
@@ -40,6 +44,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   disabled: {
-    backgroundColor: "gray",
+    backgroundColor: ThemeColors(theme).disabled,
   },
 });

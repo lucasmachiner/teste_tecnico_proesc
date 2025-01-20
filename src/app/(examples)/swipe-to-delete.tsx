@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View, Animated, Linking } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, StyleSheet, Text, View, Animated, Linking, Alert } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
 import AppleStyleSwipeableRow from "@/components/AppleStyleSwipeableRow";
 import GmailStyleSwipeableRow from "@/components/GmailStyleSwipeableRow";
 import BasicSwipeableRow from "@/components/BasicSwipeableRow";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@/theme";
+import { ThemeColors } from "@/theme/colors";
+import { useNavigation } from "expo-router";
 
 type Data = {
   title: string;
@@ -23,6 +26,9 @@ type SwipeableRowProps = {
 
 export default function SwipeToDelete() {
   const { t: translation } = useTranslation();
+  const { theme } = useTheme();
+  const navigation = useNavigation();
+
 
   const DATA: Data[] = [
     {
@@ -39,10 +45,24 @@ export default function SwipeToDelete() {
     },
   ];
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
+
+
   const Row = ({ item }: RowProps) => (
-    <RectButton style={styles.rectButton} onPress={() => alert(item.title)}>
-      <Text style={styles.titleText}>{item.title}</Text>
-      <Text style={styles.contentText} numberOfLines={3}>
+    <RectButton style={styles(theme).rectButton} onPress={() => Alert.alert(item.title)}>
+      <Text style={styles(theme).titleText}>{item.title}</Text>
+      <Text style={styles(theme).contentText} numberOfLines={3}>
         {item.content}
       </Text>
     </RectButton>
@@ -53,6 +73,7 @@ export default function SwipeToDelete() {
       return (
         <BasicSwipeableRow
           translations={{ something: translation("examples.swipeToDelete.data.swipeLeft.something") }}
+          theme={theme}
         >
           <Row item={item} />
         </BasicSwipeableRow>
@@ -60,6 +81,7 @@ export default function SwipeToDelete() {
     } else if (index % 2 === 0) {
       return (
         <AppleStyleSwipeableRow
+          theme={theme}
           translations={{
             archive: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.archive"),
             flag: translation("examples.swipeToDelete.data.swipeLeftOrRight_2.flag"),
@@ -72,6 +94,7 @@ export default function SwipeToDelete() {
     } else {
       return (
         <GmailStyleSwipeableRow
+          theme={theme}
           translations={{
             something: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.something'),
             delete: translation('examples.swipeToDelete.data.swipeLeftOrRight_1.delete')
@@ -84,18 +107,18 @@ export default function SwipeToDelete() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Swipe To Delete</Text>
-      <Text style={styles.description}>
+    <View style={styles(theme).container}>
+      <Text style={styles(theme).title}>Swipe To Delete</Text>
+      <Text style={styles(theme).description}>
         {translation('examples.swipeToDelete.description')}
       </Text>
       <Text style={{ paddingBottom: 10 }}>
         {translation('examples.swipeToDelete.swipItems')}
       </Text>
-      <View style={styles.data_container}>
+      <View style={styles(theme).data_container}>
         <FlatList
           data={DATA}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ItemSeparatorComponent={() => <View style={styles(theme).separator} />}
           renderItem={({ item, index }) => (
             <SwipeableRow item={item} index={index} />
           )}
@@ -103,13 +126,13 @@ export default function SwipeToDelete() {
         />
       </View>
 
-      <Text style={{ textAlign: "center" }}>
+      <Text style={{ textAlign: "center", color: ThemeColors(theme).text }}>
         {translation('examples.swipeToDelete.example')}
         <Text
           onPress={() => Linking.openURL("https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios")}
           style={{
             textDecorationLine: "underline",
-            color: "blue"
+            color: ThemeColors(theme).textDecorationLine
           }}
         >
           {" https://snack.expo.dev/@adamgrzybowski/react-native-gesture-handler-demo?platform=ios"}
@@ -119,12 +142,13 @@ export default function SwipeToDelete() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (theme: string) => StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
+    backgroundColor: ThemeColors(theme).background
   },
   data_container: {
     flex: 1,
@@ -133,17 +157,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+    color: ThemeColors(theme).text
   },
   description: {
     fontSize: 18,
-    color: "gray",
+    color: ThemeColors(theme).description,
     textAlign: "center",
     marginVertical: 20,
   },
   item: {
     width: "auto",
     height: 100,
-    backgroundColor: "pink",
+    //TODO -> aqui
+    // backgroundColor: "pink",
     marginVertical: 8,
     marginHorizontal: 16,
     flex: 1,
@@ -153,11 +179,12 @@ const styles = StyleSheet.create({
   },
   leftAction: {
     flex: 1,
-    backgroundColor: "#388e3c",
+    backgroundColor: ThemeColors(theme).leftActionGreen,
     justifyContent: "center",
   },
   actionText: {
-    color: "white",
+    //TODO -> aqui - primary
+    color: ThemeColors(theme).text,
     fontWeight: "600",
     padding: 20,
   },
@@ -169,18 +196,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-around",
     flexDirection: "column",
-    backgroundColor: "white",
+    //TODO -> aqui - primary
+    backgroundColor: ThemeColors(theme).item,
   },
   separator: {
-    backgroundColor: "rgb(200, 199, 204)",
+    //TODO -> aqui - separator
+    backgroundColor: ThemeColors(theme).separator,
     height: StyleSheet.hairlineWidth,
   },
   titleText: {
     fontWeight: "bold",
     backgroundColor: "transparent",
+    color: ThemeColors(theme).text
   },
   contentText: {
-    color: "#999",
+    color: ThemeColors(theme).message,
     backgroundColor: "transparent",
   },
   dateText: {
@@ -188,7 +218,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 20,
     top: 10,
-    color: "#999",
+    color: ThemeColors(theme).message,
     fontWeight: "bold",
   },
 });
