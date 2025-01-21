@@ -12,7 +12,7 @@ export const styles = (theme: string) => StyleSheet.create({
     borderRadius: 8,
   },
   text: {
-    color: "white",
+    color: ThemeColors(theme).text,
     fontSize: 16
   },
 })

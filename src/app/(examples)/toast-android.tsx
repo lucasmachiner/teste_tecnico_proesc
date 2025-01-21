@@ -123,20 +123,4 @@ const styles = (theme: string) => StyleSheet.create({
     textAlign: "center",
     marginVertical: 20,
   },
-  item: {
-    width: 300,
-    height: 100,
-    flex: 1,
-    alignItems: "center",
-    borderRadius: 6,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    justifyContent: "space-around",
-    flexDirection: "column",
-    backgroundColor: ThemeColors(theme).item,
-  },
-  separator: {
-    backgroundColor: ThemeColors(theme).separator,
-    height: StyleSheet.hairlineWidth,
-  },
 });
