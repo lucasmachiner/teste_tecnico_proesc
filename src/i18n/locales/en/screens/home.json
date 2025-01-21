@@ -21,5 +21,9 @@
   "item_5": {
     "title": "Toast Android",
     "description": "This example demonstrates how ToastAndroid works to display quick messages when performing actions in the app."
+  },
+  "item_6": {
+    "title": "Haptic Feedback",
+    "description": "This example demonstrates how Haptic Feedback works to provide tactile responses when interacting with buttons in the app."
   }
 }

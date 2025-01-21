@@ -80,6 +80,17 @@ export default function App() {
       description: translation('home.item_5.description'),
       route: "toast-android",
     },
+    {
+      title: translation('home.item_6.title'),
+      description: translation('home.item_6.description'),
+      route: "haptic-feedback",
+      badges: [
+        {
+          label: "expo-haptics",
+          variant: "secondary",
+        },
+      ],
+    },
   ];
 
   useEffect(() => {

@@ -64,5 +64,20 @@
       "toastGravityTop": "A toast that feels superior to the others",
       "toastGravityOffset": "A toast with questionable gravity and offset too"
     }
+  },
+  "hapticFeedback": {
+    "description": "This example demonstrates how to use Haptic Feedback to provide tactile feedback when interacting with buttons. Each button triggers a specific type of feedback, such as success, error, and warning notifications, or different intensities of impact (light, medium, and heavy).",
+    "orientation": "Tap the buttons to experience tactile feedback in different intensities and types.",
+    "hapticSelect": "Haptic Selection",
+    "selection": "Selection",
+    "hapticNotification": "Haptic Notification",
+    "buttonSuccess": "Success",
+    "buttonError": "Error",
+    "buttonWarning": "Warning",
+    "hapticImpact": "Haptic Impact",
+    "light": "Light",
+    "medium": "Medium",
+    "heavy": "Heavy",
+    "example": "Example from the Expo Haptics documentation at"
   }
 }

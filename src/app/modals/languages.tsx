@@ -3,14 +3,13 @@ import { View } from "react-native"
 import ContainerModal from '@/components/ContainerModal';
 import { BrazilFlag, UnitedStatesFlag } from "@/assets/svgs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import i18n from "@/i18n";
 import { useTranslation } from "react-i18next";
 import { IDataItemLang } from "@/types";
 import { RenderItemLanguage } from "@/components/RenderItemLanguage";
 
 
 export default function LanguageModal() {
-  const { t: translation } = useTranslation();
+  const { t: translation, i18n } = useTranslation();
   const [lang, setLang] = useState('');
 
   const dataItem: Array<IDataItemLang> = [
@@ -26,8 +25,10 @@ export default function LanguageModal() {
 
   useEffect(() => {
     AsyncStorage.getItem("language")
-      .then((resp) => setLang(resp as string))
-      .catch((e) => console.log(e))
+      .then((resp) => {
+        setLang(resp ?? i18n.language);
+      })
+      .catch((e) => console.log(e));
   }, [])
 
   return (
@@ -39,12 +40,11 @@ export default function LanguageModal() {
       }}>
         {
           dataItem.map((item, index) => {
-            const selected = lang === item.lang;
             return <RenderItemLanguage
               key={index}
               data={item}
               onPress={() => changeLanguage(item.lang)}
-              selected={selected}
+              selected={lang === item.lang}
             />
           })
         }
