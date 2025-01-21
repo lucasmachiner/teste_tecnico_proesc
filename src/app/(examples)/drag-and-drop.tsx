@@ -1,6 +1,6 @@
 import { useTheme } from "@/theme";
 import { ThemeColors } from "@/theme/colors";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   View,
@@ -12,6 +12,7 @@ import {
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
+import { useNavigation } from "expo-router";
 
 type Item = {
   key: string;
@@ -21,6 +22,7 @@ type Item = {
 function DragAndDrop() {
   const { t: translation } = useTranslation();
   const { theme } = useTheme();
+  const navigation = useNavigation();
 
   const DATA = [
     {
@@ -49,6 +51,20 @@ function DragAndDrop() {
     },
     []
   );
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
+
 
   return (
     <View style={styles(theme).container}>

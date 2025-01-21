@@ -1,13 +1,15 @@
 import { Button } from "@/components/Button";
 import { useTheme } from "@/theme";
 import { ThemeColors } from "@/theme/colors";
-import React from "react";
+import { useNavigation } from "expo-router";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View, ToastAndroid, Linking, Text, StyleSheet } from "react-native";
 
 export default function ToastAndroidExample() {
   const { t: translation } = useTranslation();
   const { theme } = useTheme();
+  const navigation = useNavigation();
 
   const showToast = () => {
     ToastAndroid.show(
@@ -42,6 +44,18 @@ export default function ToastAndroidExample() {
     );
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
 
   return (
     <View style={styles(theme).container}>
