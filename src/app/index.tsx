@@ -75,6 +75,11 @@ export default function App() {
         },
       ],
     },
+    {
+      title: translation('home.item_5.title'),
+      description: translation('home.item_5.description'),
+      route: "toast-android",
+    },
   ];
 
   useEffect(() => {
@@ -85,7 +90,6 @@ export default function App() {
       },
       headerStyle: {
         backgroundColor: ThemeColors(theme).primary,
-
       },
     })
   }, [translation, theme])

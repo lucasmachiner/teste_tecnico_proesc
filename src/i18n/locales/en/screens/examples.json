@@ -49,5 +49,20 @@
       "title": "Step {{value}}",
       "content": "This is the content of step {{value}}"
     }
+  },
+  "toastAndroid": {
+    "description": "This example demonstrates how to use the ToastAndroid component interactively, displaying messages in all supported positions on the screen. This allows you to explore and determine the best configuration for your applications.",
+    "orientation": "To view the toasts, simply press the available buttons and follow the displayed instructions.",
+    "toastDefault": "Simple Toast",
+    "toastGravityCenter": "Toast with Gravity at the Center",
+    "toastGravityTop": "Toast with Gravity at the Top",
+    "toastGravityOffset": "Toast with Gravity and Offset",
+    "example": "Example from the React Native documentation at",
+    "messages": {
+      "toastDefault": "A simple toast appearing for you",
+      "toastGravityCenter": "A toast that feels at the center of everything",
+      "toastGravityTop": "A toast that feels superior to the others",
+      "toastGravityOffset": "A toast with questionable gravity and offset too"
+    }
   }
 }

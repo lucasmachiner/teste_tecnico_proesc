@@ -17,5 +17,9 @@
   "item_4": {
     "title": "Expandable list(Lista Expansível)",
     "description": "Este exemplo demonstra como usar o componente `ExpandableList` para adicionar a funcionalidade de lista expansível em um FlatList."
+  },
+  "item_5": {
+    "title": "Toast Android",
+    "description": "Este exemplo demonstra como funciona o ToastAndroid para exibir mensagens rápidas ao realizar ações no app."
   }
 }
