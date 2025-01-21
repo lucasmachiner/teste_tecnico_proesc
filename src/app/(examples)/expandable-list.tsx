@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, Text, View, Linking } from "react-native";
 import ExpandableContainer from "@/components/ExpandableContainer";
 import Separator from "@/components/Separator";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@/theme";
 import { ThemeColors } from "@/theme/colors";
+import { useNavigation } from "expo-router";
 
 type DataType = {
   title: string;
@@ -15,8 +16,23 @@ type DataType = {
 export default function SwipeToDelete() {
   const { t: translation } = useTranslation();
   const { theme } = useTheme();
+  const navigation = useNavigation();
 
   const data = Array<DataType>(10);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
+
 
   return (
     <View style={styles(theme).container}>

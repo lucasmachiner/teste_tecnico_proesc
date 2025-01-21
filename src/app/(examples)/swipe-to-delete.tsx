@@ -45,6 +45,19 @@ export default function SwipeToDelete() {
     },
   ];
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTintColor: ThemeColors(theme).text,
+      headerTitleStyle: {
+        color: ThemeColors(theme).text,
+      },
+      headerStyle: {
+        backgroundColor: ThemeColors(theme).primary,
+
+      },
+    })
+  }, [theme])
+
 
   const Row = ({ item }: RowProps) => (
     <RectButton style={styles(theme).rectButton} onPress={() => Alert.alert(item.title)}>
