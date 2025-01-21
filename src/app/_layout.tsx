@@ -54,7 +54,6 @@ export default function RootLayout() {
             name="settings"
             options={{
               title: translation("settings.headerTitle"),
-
             }}
           />
           {/*MODALS */}

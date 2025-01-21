@@ -1,15 +1,13 @@
 import { useTheme } from "@/theme";
 import { ThemeColors } from "@/theme/colors";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, Linking, RefreshControl, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "expo-router";
 
 
 export default function PullToRefresh() {
   const { t: translation } = useTranslation();
   const { theme } = useTheme();
-  const navigation = useNavigation();
 
 
   const [refreshing, setRefreshing] = React.useState(false);
@@ -30,19 +28,6 @@ export default function PullToRefresh() {
       title: "Second Item",
     },
   ];
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerTintColor: ThemeColors(theme).text,
-      headerTitleStyle: {
-        color: ThemeColors(theme).text,
-      },
-      headerStyle: {
-        backgroundColor: ThemeColors(theme).primary,
-
-      },
-    })
-  }, [theme])
 
 
   return (

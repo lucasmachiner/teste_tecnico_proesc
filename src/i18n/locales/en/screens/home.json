@@ -17,5 +17,9 @@
   "item_4": {
     "title": "Lista Expansível",
     "description": "This example demonstrates how to use the ExpandableList component to add expandable list functionality to a FlatList component."
+  },
+  "item_5": {
+    "title": "Toast Android",
+    "description": "This example demonstrates how ToastAndroid works to display quick messages when performing actions in the app."
   }
 }
