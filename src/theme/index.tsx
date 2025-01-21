@@ -1,3 +1,4 @@
+import AsyncStorageService from '@/service/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
@@ -14,14 +15,15 @@ const ThemeContext = createContext({} as ThemeContextData);
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState('light');
+  const { setItem, getItem } = AsyncStorageService;
 
   const toggleTheme = async (themeMode: string) => {
-    await AsyncStorage.setItem("theme", themeMode);
+    await setItem("theme", themeMode);
     setTheme(themeMode);
   };
 
   useEffect(() => {
-    AsyncStorage.getItem("theme")
+    getItem("theme")
       .then((resp) => setTheme(resp as string))
       .catch((e) => console.log(e))
   }, [])

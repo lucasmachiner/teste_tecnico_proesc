@@ -1,6 +1,5 @@
 import { FlashList } from "@shopify/flash-list";
 import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity } from "react-native"
-import Ionicons from "@expo/vector-icons/Ionicons"
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter, useNavigation } from "expo-router";
@@ -97,7 +96,6 @@ const styles = (theme: string) => StyleSheet.create({
   icon: {
     borderRadius: 8,
     padding: 8,
-    // TODO -> aqui - description
     backgroundColor: ThemeColors(theme).description
   },
   label: {
