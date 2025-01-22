@@ -1,5 +1,4 @@
 import AsyncStorageService from '@/service/async-storage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ThemeProviderProps {
